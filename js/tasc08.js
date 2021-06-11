@@ -90,10 +90,6 @@ document.addEventListener('keydown', (event) => {
 
 
   
-
-
-
-
 // function closeOnEscape(callback) {
 //   document.addEventListener('keydown', event => {
 //       if (event.code === 'Escape') {
