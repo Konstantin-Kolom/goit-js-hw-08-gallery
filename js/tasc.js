@@ -3,12 +3,14 @@ import images from '/gallery-items.js';
 const refs = {
    gallery: document.querySelector('.js-gallery'),
    linkA: document.querySelector('.gallery__link'),
+
    lightbox: document.querySelector('.js-lightbox'),
+   overlay: document.querySelector('.lightbox__overlay'),
    modalImages: document.querySelector('.lightbox__image'),
    modal: document.querySelector('.js-lightbox'),
+
    closeModalBtn: document.querySelector('button[data-action="close-lightbox"]'),
 
-   overlay: document.querySelector('.lightbox__overlay'),
 }
 // console.log(refs.overlay);
 
@@ -35,9 +37,9 @@ refs.gallery.insertAdjacentHTML('beforeend', galleryMarkup);
 
 
 // Реализация делегирования на галерее 
-refs.gallery.addEventListener('click', ongalleryClick);
+refs.gallery.addEventListener('click', onGalleryClick);
 
-function ongalleryClick(event) {
+function onGalleryClick(event) {
    event.preventDefault();
 
    if (event.target.nodeName !== 'IMG') {
@@ -48,15 +50,12 @@ function ongalleryClick(event) {
    const largeImagesURL = imagesRef.dataset.source;
    const largeImagesALT = imagesRef.alt
    
-
-   // Подмена значения атрибутjd
+   // Подмена значения атрибутов
    setLargeImageSrc(largeImagesURL);  
    setLargeImageAlt(largeImagesALT);
 
-   
    // Открытие модального окна 
-   refs.modal.classList.add('is-open')
-
+   refs.modal.classList.add('is-open');
 }
 
 // url в модалку
@@ -69,40 +68,31 @@ function setLargeImageAlt(alt) {
 }
 
 // Закрытие модального. Очистка значения атрибута src
-refs.closeModalBtn.addEventListener('click',() => {
+function closeModal() {
    refs.modal.classList.remove('is-open');
    refs.modalImages.src = "";
    refs.modalImages.alt = "";
-})
+}
 
-refs.overlay.addEventListener('click',() => {
-   refs.modal.classList.remove('is-open');
-   refs.modalImages.src = "";
-   refs.modalImages.alt = "";
-})
 
-refs.overlay.addEventListener('keypress', event => {
-   if (event.code === 'Escape') {
-      console.log(event.code);
-   // refs.modal.classList.remove('is-open');
-   // refs.modalImages.src = "";
-   // refs.modalImages.alt = "";
+refs.closeModalBtn.addEventListener('click', closeModal);
+
+refs.overlay.addEventListener('click', closeModal);
+
+document.addEventListener('keydown', (event) => {
+   if (event.code === 'Escape' && refs.modal.classList.contains('is-open') === true) {
+      // console.log(event.code);
+      closeModal(event);
    }
-
 })
 
+//Навигация по картинкам 
 
-//Наивгация по кнопкам
 
-
-// function (e) {
-//    if (e.keyCode === 27) {
-//        refs.modal.classList.remove('is-open');
-//        refs.modalImages.src = "";
-//        refs.modalImages.alt = "";
-//    }
-// });
   
+
+
+
 
 // function closeOnEscape(callback) {
 //   document.addEventListener('keydown', event => {
