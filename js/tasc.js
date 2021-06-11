@@ -50,7 +50,7 @@ function ongalleryClick(event) {
    
 
    // Подмена значения атрибутjd
-   setLargeImageSrc(largeImagesURL);
+   setLargeImageSrc(largeImagesURL);  
    setLargeImageAlt(largeImagesALT);
 
    
@@ -81,4 +81,37 @@ refs.overlay.addEventListener('click',() => {
    refs.modalImages.alt = "";
 })
 
+refs.overlay.addEventListener('keypress', event => {
+   if (event.code === 'Escape') {
+      console.log(event.code);
+   // refs.modal.classList.remove('is-open');
+   // refs.modalImages.src = "";
+   // refs.modalImages.alt = "";
+   }
+
+})
+
+
 //Наивгация по кнопкам
+
+
+// function (e) {
+//    if (e.keyCode === 27) {
+//        refs.modal.classList.remove('is-open');
+//        refs.modalImages.src = "";
+//        refs.modalImages.alt = "";
+//    }
+// });
+  
+
+// function closeOnEscape(callback) {
+//   document.addEventListener('keydown', event => {
+//       if (event.code === 'Escape') {
+//         callback();
+//       }
+//     },
+//     {
+//       once: true,
+//     }
+//   );
+// }
